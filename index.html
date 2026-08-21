@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活動記録表</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header>
+      <h1>活動記録表</h1>
+      <div class="date-nav">
+        <button type="button" id="prev-date" class="arrow left" aria-label="前日へ"></button>
+        <input type="date" id="current-date" aria-label="日付を選択">
+        <button type="button" id="next-date" class="arrow right" aria-label="翌日へ"></button>
+      </div>
+    </header>
+
+    <section id="record-table" class="record-table" aria-label="活動記録">
+      <div class="table-head">時刻</div>
+      <div class="table-head">活動記録</div>
+      <div class="table-head">気分</div>
+    </section>
+
+    <button type="button" id="save-button" class="save-button">記録をつける</button>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

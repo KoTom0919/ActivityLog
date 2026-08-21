@@ -1,0 +1,245 @@
+:root {
+  --blue: #156385;
+  --ink: #062b3c;
+  --row-light: #e6e9ec;
+  --row-dark: #cdd3d8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #f4f6f7;
+  color: #0a0a0a;
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 675px);
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  padding: 12px 48px 0;
+  overflow: hidden;
+  background: white;
+}
+
+header {
+  flex-shrink: 0;
+}
+
+h1 {
+  margin: 0 0 22px;
+  color: var(--blue);
+  font-size: clamp(36px, 7vw, 52px);
+  line-height: 1.05;
+  text-align: center;
+  letter-spacing: .05em;
+  text-shadow: 3px 5px 2px #c7cdd0;
+}
+
+.date-nav {
+  display: grid;
+  grid-template-columns: 68px 1fr 68px;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.date-nav #current-date {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  background: #d9f3ce;
+  font-size: 25px;
+  font-weight: 700;
+  white-space: nowrap;
+  width: 100%;
+  cursor: pointer;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  padding: 0;
+  border-top: 27px solid transparent;
+  border-bottom: 27px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  filter: drop-shadow(0 0 1px var(--ink));
+}
+
+.arrow.left {
+  border-right: 68px solid var(--blue);
+  border-left: 0;
+}
+
+.arrow.right {
+  border-left: 68px solid var(--blue);
+  border-right: 0;
+}
+
+.record-table {
+  display: grid;
+  grid-template-columns: 115px 1fr 98px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  align-content: start;
+  border: 1px solid white;
+}
+
+.table-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  padding: 8px 6px;
+  border-right: 2px solid white;
+  background: var(--blue);
+  color: white;
+  text-align: center;
+  font-weight: 700;
+}
+
+.table-row {
+  display: contents;
+}
+
+.hour,
+.activity-input,
+.mood-select {
+  min-width: 0;
+  min-height: 38px;
+  height: auto;
+  border: 1px solid white;
+  border-radius: 0;
+  outline: none;
+}
+.hour,
+.mood-select {
+  height: 100%;
+  align-self: stretch;
+}
+
+.hour {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--row-light);
+  font-weight: 700;
+}
+
+.activity-input {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  overflow: hidden;
+  resize: none;
+  background: var(--row-light);
+  line-height: 1.4;
+  font-family: inherit;
+}
+
+.mood-select {
+  width: 100%;
+  padding: 2px 8px;
+  background: var(--row-light);
+  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.table-row:nth-child(even) .hour,
+.table-row:nth-child(even) .activity-input,
+.table-row:nth-child(even) .mood-select {
+  background: var(--row-dark);
+}
+
+.activity-input:focus,
+.mood-select:focus {
+  box-shadow: inset 0 0 0 2px var(--blue);
+}
+
+.save-button {
+  flex-shrink: 0;
+  width: calc(100% + 96px);
+  min-height: 64px;
+  margin: 16px -48px 0;
+  border: 2px solid var(--ink);
+  background: #fde3d4;
+  font-size: 25px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 10px 10px 0;
+  }
+
+  h1 {
+    margin-bottom: 16px;
+    font-size: 36px;
+  }
+
+  .date-nav {
+    grid-template-columns: 42px 1fr 42px;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .date-nav #current-date {
+    min-height: 48px;
+    font-size: 20px;
+  }
+
+  .arrow {
+    border-top-width: 22px;
+    border-bottom-width: 22px;
+  }
+
+  .arrow.left {
+    border-right-width: 42px;
+  }
+
+  .arrow.right {
+    border-left-width: 42px;
+  }
+
+  .record-table {
+    grid-template-columns: 70px 1fr 68px;
+  }
+
+  .table-head {
+    padding: 7px 2px;
+    font-size: 14px;
+  }
+
+  .hour,
+  .activity-input,
+  .mood-select {
+    min-height: 37px;
+    height: auto;
+  }
+
+  .save-button {
+    width: calc(100% + 20px);
+    margin-right: -10px;
+    margin-left: -10px;
+  }
+}
