@@ -85,11 +85,13 @@ h1 {
 
 .arrow.left {
   border-right: 68px solid var(--blue);
+  border-right-color: #87ceeb;
   border-left: 0;
 }
 
 .arrow.right {
   border-left: 68px solid var(--blue);
+  border-left-color:#87ceeb;
   border-right: 0;
 }
 
@@ -187,6 +189,7 @@ h1 {
   cursor: pointer;
 }
 
+
 @media (max-width: 560px) {
   .app-shell {
     padding: 10px 10px 0;
@@ -206,6 +209,8 @@ h1 {
   .date-nav #current-date {
     min-height: 48px;
     font-size: 20px;
+    width:80%;
+    justify-self: center;
   }
 
   .arrow {
