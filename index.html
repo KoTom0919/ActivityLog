@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>活動記録表</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <main class="app-shell">
     <header>
-      <h1>活動記録表</h1>
+      <div class="title-row">
+        <h1>活動記録表</h1>
+        <button type="button" id="extract-button" class="extract-button">
+          抽出
+        </button>
+      </div>
       <div class="date-nav">
         <button type="button" id="prev-date" class="arrow left" aria-label="前日へ"></button>
         <input type="date" id="current-date" aria-label="日付を選択">
@@ -28,4 +34,5 @@
   </main>
   <script src="script.js"></script>
 </body>
+
 </html>

@@ -85,3 +85,209 @@ dateDisplay.addEventListener("change", () => {
 
 createRows();
 loadRecord();
+const extractButton = document.getElementById("extract-button");
+
+function escapeHtml(text) {
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function formatJapaneseDate(date) {
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+}
+
+function createPrintTable(date) {
+  const dateKey = getDateKey(date);
+
+  const records = JSON.parse(
+    localStorage.getItem(`activity-record:${dateKey}`) || "[]"
+  );
+
+  let rows = "";
+
+  for (let hour = 0; hour < 24; hour++) {
+    const activity = records[hour]?.activity || "";
+    const mood = records[hour]?.mood || "";
+
+    rows += `
+      <tr>
+        <td class="hour-cell">${hour}時</td>
+        <td class="activity-cell">${escapeHtml(activity)}</td>
+        <td class="mood-cell">${escapeHtml(mood)}</td>
+      </tr>
+    `;
+  }
+
+  return `
+    <section class="day-record">
+      <h2>${formatJapaneseDate(date)}</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="hour-cell">時刻</th>
+            <th class="activity-cell">活動記録</th>
+            <th class="mood-cell">気分</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+    </section>
+  `;
+}
+
+function extractFourDays() {
+  const printWindow = window.open("", "_blank");
+
+  if (!printWindow) {
+    alert("印刷画面を開けませんでした。ポップアップを許可してください。");
+    return;
+  }
+
+  let fourDaysHtml = "";
+
+  /*
+   選択中の日付からさかのぼって4日分を作成
+   例：24日を選択している場合は21日～24日
+  */
+  for (let amount = 3; amount >= 0; amount--) {
+    const targetDate = new Date(selectedDate);
+    targetDate.setDate(targetDate.getDate() - amount);
+    fourDaysHtml += createPrintTable(targetDate);
+  }
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+      <meta charset="UTF-8">
+      <title>活動記録表</title>
+
+      <style>
+        @page {
+          size: A4 landscape;
+          margin: 8mm;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          color: #000;
+          font-family: Arial, "Noto Sans JP", sans-serif;
+        }
+
+        .print-title {
+          margin: 0 0 5mm;
+          color: #156385;
+          font-size: 22px;
+          text-align: center;
+        }
+
+        .four-days {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0,1fr));
+          gap: 4mm;
+          align-items: start;
+          padding-right: 1mm;
+        }
+
+        .day-record {
+          min-width: 0;
+        }
+
+        .day-record h2 {
+          margin: 0 0 2mm;
+          font-size: 12px;
+          text-align: center;
+        }
+
+        table {
+          width: calc(100% - 0.5mm);
+          border-collapse: collapse;
+          table-layout: fixed;
+          font-size: 7px;
+        }
+
+        th,
+        td {
+          height: 6.5mm;
+          padding: 0.5mm 1mm;
+          overflow-wrap: anywhere;
+          border: 0.3mm solid #777;
+          vertical-align: middle;
+        }
+
+        th {
+          height: 7mm;
+          background: #156385;
+          color: white;
+          font-size: 8px;
+          text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+          background: #e6e9ec;
+        }
+
+        tbody tr:nth-child(odd) {
+          background: #f4f6f7;
+        }
+
+        .hour-cell {
+          width: 12%;
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        .activity-cell {
+          width: 70%;
+          white-space: pre-wrap;
+        }
+
+        .mood-cell {
+          width: 18%;
+          text-align: center;
+        }
+
+        @media print {
+          .four-days {
+            break-inside: avoid;
+          }
+
+          .day-record {
+            break-inside: avoid;
+          }
+        }
+      </style>
+    </head>
+
+    <body>
+      <h1 class="print-title">活動記録表</h1>
+
+      <main class="four-days">
+        ${fourDaysHtml}
+      </main>
+
+      <script>
+        window.onload = function () {
+          window.print();
+        };
+      <\/script>
+    </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+}
+
+extractButton.addEventListener("click", extractFourDays);
