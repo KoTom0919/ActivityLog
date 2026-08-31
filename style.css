@@ -19,7 +19,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -211,11 +212,46 @@ h1 {
   font-weight: 700;
   cursor: pointer;
 }
+.memo-row {
+  display: contents;
+}
 
+.memo-label {
+  display: flex;
+  min-height: 100px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  background: var(--row-dark);
+  font-weight: 700;
+}
+
+.daily-memo {
+  grid-column: span 2;
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 0;
+  outline: none;
+  resize: vertical;
+  background: var(--row-dark);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.daily-memo:focus {
+  box-shadow: inset 0 0 0 2px var(--blue);
+}
 
 @media (max-width: 560px) {
   .app-shell {
     padding: 10px 10px 0;
+  }
+  .activity-input,
+  .mood-select {
+    font-size: 16px;
   }
 
   h1 {
@@ -270,4 +306,5 @@ h1 {
     margin-right: -10px;
     margin-left: -10px;
   }
+  
 }
