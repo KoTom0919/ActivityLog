@@ -403,7 +403,7 @@ function extractPeriod() {
           grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 4mm;
           align-items: start;
-          height: 190mm;
+          height: 185mm;
           padding-right: 1mm;
           break-after: page;
           page-break-after: always;
@@ -435,8 +435,8 @@ function extractPeriod() {
 
         th,
         td {
-          height: 6mm;
-          max-height: 6mm;
+          height: 5.5mm;
+          max-height: 5.5mm;
           padding: 0.25mm 1mm;
           line-height: 1.15;
           overflow-wrap: anywhere;
@@ -445,8 +445,8 @@ function extractPeriod() {
         }
 
         th {
-          height: 6.5mm;
-          max-height: 6.5mm;
+          height: 6mm;
+          max-height: 6mm;
           background: #156385;
           color: white;
           font-size: 8px;
@@ -481,7 +481,7 @@ function extractPeriod() {
           display: grid;
           grid-template-columns: 16% 84%;
           width: calc(100% - 0.5mm);
-          min-height: 12mm;
+          min-height: 10mm;
           margin-top: 1mm;
           border: 0.3mm solid #777;
           background: white;
@@ -501,7 +501,7 @@ function extractPeriod() {
 
         .print-memo-text {
           min-width: 0;
-          min-height: 12mm;
+          min-height: 10mm;
           padding: 1mm;
           overflow-wrap: anywhere;
           white-space: pre-wrap;
