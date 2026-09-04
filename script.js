@@ -387,6 +387,11 @@ function extractPeriod() {
           box-sizing: border-box;
         }
 
+        html {
+          -webkit-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+        }
+
         body {
           margin: 0;
           color: #000;
@@ -398,7 +403,7 @@ function extractPeriod() {
           grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 4mm;
           align-items: start;
-          min-height: 190mm;
+          height: 190mm;
           padding-right: 1mm;
           break-after: page;
           page-break-after: always;
@@ -430,15 +435,18 @@ function extractPeriod() {
 
         th,
         td {
-          height: 6.5mm;
-          padding: 0.5mm 1mm;
+          height: 6mm;
+          max-height: 6mm;
+          padding: 0.25mm 1mm;
+          line-height: 1.15;
           overflow-wrap: anywhere;
           border: 0.3mm solid #777;
           vertical-align: middle;
         }
 
         th {
-          height: 7mm;
+          height: 6.5mm;
+          max-height: 6.5mm;
           background: #156385;
           color: white;
           font-size: 8px;
@@ -473,7 +481,7 @@ function extractPeriod() {
           display: grid;
           grid-template-columns: 16% 84%;
           width: calc(100% - 0.5mm);
-          min-height: 14mm;
+          min-height: 12mm;
           margin-top: 1mm;
           border: 0.3mm solid #777;
           background: white;
@@ -493,7 +501,7 @@ function extractPeriod() {
 
         .print-memo-text {
           min-width: 0;
-          min-height: 14mm;
+          min-height: 12mm;
           padding: 1mm;
           overflow-wrap: anywhere;
           white-space: pre-wrap;
@@ -516,8 +524,7 @@ function extractPeriod() {
     <body>
       ${printPagesHtml}
 
-
-            <script>
+      <script>
         window.onload = function () {
           window.onafterprint = function () {
             if (window.frameElement) {
