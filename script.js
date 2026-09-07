@@ -432,26 +432,26 @@ function extractPeriod() {
           table-layout: fixed;
           font-size: 7px;
         }
+th,
+td {
+  height: 4.125mm;
+  max-height: 4.125mm;
+  padding: 0.1875mm 1mm;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  border: 0.3mm solid #777;
+  vertical-align: middle;
+}
 
-        th,
-        td {
-          height: 5.5mm;
-          max-height: 5.5mm;
-          padding: 0.25mm 1mm;
-          line-height: 1.15;
-          overflow-wrap: anywhere;
-          border: 0.3mm solid #777;
-          vertical-align: middle;
-        }
-
-        th {
-          height: 6mm;
-          max-height: 6mm;
-          background: #156385;
-          color: white;
-          font-size: 8px;
-          text-align: center;
-        }
+th {
+  height: 4.5mm;
+  max-height: 4.5mm;
+  background: #156385;
+  color: white;
+  font-size: 8px;
+  text-align: center;
+}
+      
 
         tbody tr:nth-child(even) {
           background: #e6e9ec;
